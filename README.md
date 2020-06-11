@@ -30,10 +30,20 @@ module.exports = (parser, options) => {
       //You can now use a callback for executing code when the flag is called
     },
   });
+  //Want to add functions to it via a plugin, you can do this:
+  return {
+    method1(){
+      //do code
+    }
+    method2(){
+      //Do some other code. You can then use these functions in your main cli where you are using the module like so: 
+      //program.method1();
+    }
+  }
 };
 ```
 
 This code created a program, adds a command and will check some values. NOTE: program.parsed returns all expected values which exist. Also note that program.start(); has to be below all of the command adding.<br>
 program.parsed.test works because you added the command with the name test, this works like this for all other commands.<br>
-**Official plugins:** ez-args-help | <br>
+**Official plugins:** ez-args-help | ez-args-json <br>
 These plugins are all on NPM.

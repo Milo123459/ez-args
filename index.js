@@ -72,7 +72,16 @@ class Typer {
    * @param {Object} options The options for the module
    */
   use(mod,options) {
-    if (mod) mod(this,options);
+    if (mod) {
+      let returner = mod(this,options);
+      try{
+      if(returner){
+        for(const[key,value] of Object.entries(returner)){
+          this[key]=value;
+        }
+      }
+    }catch{}
+    };
   }
   get utils() {
     return utils;

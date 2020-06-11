@@ -1,5 +1,5 @@
 module.exports = (parser,options) => {
-  if(options.helpText) console.log(options.helpText);
+  if(options && options.helpText) console.log(options.helpText);
   parser.command({
     name: "help",
     description: "Get all commands and info on them",
