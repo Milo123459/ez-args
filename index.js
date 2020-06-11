@@ -1,50 +1,89 @@
+const utils = require('./utils');
 class Command {
-  constructor(options){
-      let o = options;
-      this.name=o.name;
-      this.flags=o.flags;
-      this.description=o.description;
+  constructor(options) {
+    let o = options;
+    this.name = o.name;
+    this.flags = o.flags;
+    this.description = o.description;
+    this.code=o.code;
   }
-};
+}
 class Typer {
-  constructor(){
-      this.commands = [];
-      this.result = {};
-      this.res = [];
+  constructor() {
+    this.commands = [];
+    this.result = {};
+    this.res = [];
   }
   /**
-   * 
+   *
    * @param {Object} options Options of the command
    * @param {String} options.name The name of the command
    * @param {Array} options.flags The flags of the command
-   * @param {String} options.description The description of the command
+   * @param {String} [options.description] The description of the command
+   * @param {Function} [options.code] A callback to be initiated directly in the command
    */
-  command(options){
-      this.commands.push(new Command(options));
+  command(options) {
+    this.commands.push(new Command(options));
   }
   /**
    * @method
    * @description Start the system.
    */
-  start(){
-      process.argv.map((arg,i) => {
-          this.commands.map((cmd,y) => {
-              if(cmd.flags.includes(arg)){
-                  this.res.push({
-                      cmd: cmd.name.toLowerCase(),
-                      flagContent: process.argv[i+1] ? process.argv[i+1].startsWith("-") ? true : process.argv[i+1] ? process.argv[i+1] : true : true,
-                      flag: arg
-                  })
-              }
-          })
-      })
-      this["result"] = {};
-      this.res.map(res => {
-          this["result"][res.cmd.toLowerCase()] = res;
-      })
+  start() {
+    process.argv.map((arg, i) => {
+      this.commands.map((cmd, y) => {
+        if (cmd.flags.includes(arg)) {
+          if(cmd.code){
+            cmd.code(process.argv[i + 1]
+              ? process.argv[i + 1].startsWith("-")
+                ? true
+                : process.argv[i + 1]
+                ? process.argv[i + 1]
+                : true
+              : true)
+          }
+          this.res.push({
+            cmd: cmd.name.toLowerCase(),
+            flagContent: process.argv[i + 1]
+              ? process.argv[i + 1].startsWith("-")
+                ? true
+                : process.argv[i + 1]
+                ? process.argv[i + 1]
+                : true
+              : true,
+            flag: arg,
+          });
+        }
+      });
+    });
+    this["result"] = {};
+    this.res.map((res) => {
+      this["result"][res.cmd.toLowerCase()] = res;
+    });
   }
-  get parsed(){
-      return this.result;
+  get parsed() {
+    return this.result;
   }
-};
+  /**
+   * @method
+   * @param {String} mod The module, typically an npm package but can be another file. Call it with the require keyword.
+   */
+  use(mod){
+    if(mod) mod(this);
+  }
+  get utils(){
+    return utils;
+  }
+}
 module.exports = Typer;
+let cl = new Typer();
+cl.command({
+  name: 'o',
+  description: 'A',
+  flags: ["-e","--e"],
+  code: (data) => {
+    console.log(`${utils.term(utils.typeCheck(data,"string"),"Got a string",`Got a ${utils.type(data)}`)}`)
+  }
+});
+cl.start();
+cl.use(require('./plug.js'))
