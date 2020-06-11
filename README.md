@@ -29,7 +29,6 @@ module.exports = (parser) => {
       //You can now use a callback for executing code when the flag is called
     },
   });
-  program.start(); //Save your plugin.
 };
 ```
 

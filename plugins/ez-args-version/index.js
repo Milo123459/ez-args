@@ -9,5 +9,4 @@ module.exports = (parser) => {
       );
     },
   });
-  parser.start();
 };
