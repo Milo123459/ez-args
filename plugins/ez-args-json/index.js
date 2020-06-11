@@ -1,6 +1,11 @@
 const path = require('./path');
 const fs = require('fs');
-module.exports = (p, o) => {
+const ez = require('../../index');
+/**
+ * @param {ez} parser 
+ * @param {Object} options 
+ */
+module.exports = (parser, options) => {
     return {
         set(key,value){
             let js;

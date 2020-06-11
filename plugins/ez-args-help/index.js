@@ -1,3 +1,8 @@
+const ez = require('../../index');
+/**
+ * @param {ez} parser 
+ * @param {Object} options 
+ */
 module.exports = (parser,options) => {
   if(options && options.helpText) console.log(options.helpText);
   parser.command({
