@@ -1,6 +1,6 @@
 {
-  "name": "ez-args-help",
-  "version": "1.0.2",
+  "name": "ez-args-version",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
