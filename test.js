@@ -6,6 +6,6 @@ cli.command({
   description: "Hello",
   flags: ["-hi", "--hi"],
 });
-if(cli.parsed["hi!"]){
-  console.log("O!")
+if (cli.parsed["hi!"]) {
+  console.log("O!");
 }

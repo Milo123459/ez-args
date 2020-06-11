@@ -1,11 +1,11 @@
-const utils = require('./utils');
+const utils = require("./utils");
 class Command {
   constructor(options) {
     let o = options;
     this.name = o.name;
     this.flags = o.flags;
     this.description = o.description;
-    this.code=o.code;
+    this.code = o.code;
   }
 }
 class Typer {
@@ -33,14 +33,16 @@ class Typer {
     process.argv.map((arg, i) => {
       this.commands.map((cmd, y) => {
         if (cmd.flags.includes(arg)) {
-          if(cmd.code){
-            cmd.code(process.argv[i + 1]
-              ? process.argv[i + 1].startsWith("-")
-                ? true
-                : process.argv[i + 1]
-                ? process.argv[i + 1]
+          if (cmd.code) {
+            cmd.code(
+              process.argv[i + 1]
+                ? process.argv[i + 1].startsWith("-")
+                  ? true
+                  : process.argv[i + 1]
+                  ? process.argv[i + 1]
+                  : true
                 : true
-              : true)
+            );
           }
           this.res.push({
             cmd: cmd.name.toLowerCase(),
@@ -68,10 +70,10 @@ class Typer {
    * @method
    * @param {String} mod The module, typically an npm package but can be another file. Call it with the require keyword.
    */
-  use(mod){
-    if(mod) mod(this);
+  use(mod) {
+    if (mod) mod(this);
   }
-  get utils(){
+  get utils() {
     return utils;
   }
 }

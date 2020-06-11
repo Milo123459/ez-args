@@ -16,7 +16,7 @@ if (program.parsed.test) {
 } else {
   console.log("You did not call the the test flag");
 }
-program.use(require('ez-args-plugin'))
+program.use(require("ez-args-plugin"));
 //Use a plugin which will have standard commands, or you can require a file.
 //To create a plugin, go into your plugin folder and do the following:
 module.exports = (parser) => {
@@ -27,10 +27,10 @@ module.exports = (parser) => {
     flags: ["-t", "--t"],
     code: (data) => {
       //You can now use a callback for executing code when the flag is called
-    }
-  })
+    },
+  });
   program.start(); //Save your plugin.
-}
+};
 ```
 
 This code created a program, adds a command and will check some values. NOTE: program.parsed returns all expected values which exist. Also note that program.start(); has to be below all of the command adding.<br>
