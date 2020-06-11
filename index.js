@@ -69,9 +69,10 @@ class Typer {
   /**
    * @method
    * @param {String} mod The module, typically an npm package but can be another file. Call it with the require keyword.
+   * @param {Object} options The options for the module
    */
-  use(mod) {
-    if (mod) mod(this);
+  use(mod,options) {
+    if (mod) mod(this,options);
   }
   get utils() {
     return utils;

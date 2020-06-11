@@ -1,4 +1,5 @@
-module.exports = (parser) => {
+module.exports = (parser,options) => {
+  if(options.helpText) console.log(options.helpText);
   parser.command({
     name: "help",
     description: "Get all commands and info on them",

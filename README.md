@@ -16,11 +16,12 @@ if (program.parsed.test) {
 } else {
   console.log("You did not call the the test flag");
 }
-program.use(require("ez-args-plugin"));
+program.use(require("<plugin or file>"),options);
 //Use a plugin which will have standard commands, or you can require a file.
 //To create a plugin, go into your plugin folder and do the following:
-module.exports = (parser) => {
+module.exports = (parser, options) => {
   //Put your code here, parser is the program and has all properties
+  //Options is an object which will take in all data passed through in the second param when using <program>.use 
   program.command({
     name: "test",
     description: "Test stuff!",
