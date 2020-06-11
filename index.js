@@ -76,14 +76,3 @@ class Typer {
   }
 }
 module.exports = Typer;
-let cl = new Typer();
-cl.command({
-  name: 'o',
-  description: 'A',
-  flags: ["-e","--e"],
-  code: (data) => {
-    console.log(`${utils.term(utils.typeCheck(data,"string"),"Got a string",`Got a ${utils.type(data)}`)}`)
-  }
-});
-cl.start();
-cl.use(require('./plug.js'))
