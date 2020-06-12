@@ -6,19 +6,22 @@ const ez = require('../../index');
  * @param {Object} options 
  */
 module.exports = (parser, options) => {
+    if(!options) throw new TypeError("No options specified!");
+    if(!options.name) throw new TypeError("No options.name specified!")
     return {
+        callName: 'json',
         set(key,value){
             let js;
-            if(fs.existsSync(path)){
-                js = JSON.parse(JSON.stringify(require(path)))
+            if(fs.existsSync(path.replace(/{n}/gi,options.name))){
+                js = JSON.parse(JSON.stringify(require(path.replace(/{n}/gi,options.name))))
             }else js = {};
             js[key]=value;
-            fs.writeFileSync(path,JSON.stringify(js,null,2))
+            fs.writeFileSync(path.replace(/{n}/gi,options.name),JSON.stringify(js,null,2))
         },
         get(key){
             let js;
-            if(fs.existsSync(path)){
-                js = JSON.parse(JSON.stringify(require(path)));
+            if(fs.existsSync(path.replace(/{n}/gi,options.name))){
+                js = JSON.parse(JSON.stringify(require(path.replace(/{n}/gi,options.name))));
             }
             if(!js) return undefined;
             if(!js[key]) return undefined; else return js[key]
@@ -28,11 +31,11 @@ module.exports = (parser, options) => {
         },
         delete(key){
             let js;
-            if(fs.existsSync(path)){
-                js = JSON.parse(JSON.stringify(require(path)))
+            if(fs.existsSync(path.replace(/{n}/gi,options.name))){
+                js = JSON.parse(JSON.stringify(require(path.replace(/{n}/gi,options.name))))
             }else return undefined;
             js[key]=undefined;
-            fs.writeFileSync(path,JSON.stringify(js,null,2))
+            fs.writeFileSync(path.replace(/{n}/gi,options.name),JSON.stringify(js,null,2))
         }
     }
 }

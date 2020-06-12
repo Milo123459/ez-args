@@ -32,12 +32,14 @@ module.exports = (parser, options) => {
   });
   //Want to add functions to it via a plugin, you can do this:
   return {
+    callName: 'test', //callName is required so you can do; program.<callname>.<method>;
     method1(){
       //do code
     }
     method2(){
       //Do some other code. You can then use these functions in your main cli where you are using the module like so: 
-      //program.method1();
+      //program.test.method1();
+      //Please note this is an example!
     }
   }
 };

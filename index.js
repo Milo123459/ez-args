@@ -76,11 +76,14 @@ class Typer {
       let returner = mod(this,options);
       try{
       if(returner){
+        if(!returner.callName) throw new TypeError("Could not find property 'callName' of the plugin.")
+        console.log(returner)
+        this[returner.callName.toLowerCase()] = {};
         for(const[key,value] of Object.entries(returner)){
-          this[key]=value;
+          this[returner.callName.toLowerCase()][key]=value;
         }
       }
-    }catch{}
+    }catch(e){console.error(e)}
     };
   }
   get utils() {
