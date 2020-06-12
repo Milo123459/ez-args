@@ -71,20 +71,24 @@ class Typer {
    * @param {String} mod The module, typically an npm package but can be another file. Call it with the require keyword.
    * @param {Object} options The options for the module
    */
-  use(mod,options) {
+  use(mod, options) {
     if (mod) {
-      let returner = mod(this,options);
-      try{
-      if(returner){
-        if(!returner.callName) throw new TypeError("Could not find property 'callName' of the plugin.")
-        console.log(returner)
-        this[returner.callName.toLowerCase()] = {};
-        for(const[key,value] of Object.entries(returner)){
-          this[returner.callName.toLowerCase()][key]=value;
+      let returner = mod(this, options);
+      try {
+        if (returner) {
+          if (!returner.callName)
+            throw new TypeError(
+              "Could not find property 'callName' of the plugin."
+            );
+          this[returner.callName.toLowerCase()] = {};
+          for (const [key, value] of Object.entries(returner)) {
+            this[returner.callName.toLowerCase()][key] = value;
+          }
         }
+      } catch (e) {
+        console.error(e);
       }
-    }catch(e){console.error(e)}
-    };
+    }
   }
   get utils() {
     return utils;

@@ -1,10 +1,10 @@
-const ez = require('../../index');
+const ez = require("../../index");
 /**
- * @param {ez} parser 
- * @param {Object} options 
+ * @param {ez} parser
+ * @param {Object} options
  */
-module.exports = (parser,options) => {
-  if(options && options.helpText) console.log(options.helpText);
+module.exports = (parser, options) => {
+  if (options && options.helpText) console.log(options.helpText);
   parser.command({
     name: "help",
     description: "Get all commands and info on them",

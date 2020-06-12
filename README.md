@@ -21,7 +21,7 @@ program.use(require("<plugin or file>"),options);
 //To create a plugin, go into your plugin folder and do the following:
 module.exports = (parser, options) => {
   //Put your code here, parser is the program and has all properties
-  //Options is an object which will take in all data passed through in the second param when using <program>.use 
+  //Options is an object which will take in all data passed through in the second param when using <program>.use
   program.command({
     name: "test",
     description: "Test stuff!",
@@ -37,7 +37,7 @@ module.exports = (parser, options) => {
       //do code
     }
     method2(){
-      //Do some other code. You can then use these functions in your main cli where you are using the module like so: 
+      //Do some other code. You can then use these functions in your main cli where you are using the module like so:
       //program.test.method1();
       //Please note this is an example!
     }
